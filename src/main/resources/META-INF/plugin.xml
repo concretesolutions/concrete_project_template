@@ -9,7 +9,7 @@
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+        <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.WizardTemplateProviderImpl" />
     </extensions>
 </idea-plugin>
