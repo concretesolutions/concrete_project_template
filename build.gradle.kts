@@ -39,8 +39,8 @@ tasks.getByName<Test>("test") {
 
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>""")
+      Versão inicial do plugin para criar projeto seguindo recomendações da Concrete
+      """)
 }
 
 tasks {

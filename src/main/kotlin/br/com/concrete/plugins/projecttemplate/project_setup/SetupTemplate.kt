@@ -1,10 +1,9 @@
 package br.com.concrete.plugins.projecttemplate.project_setup
 
-import com.android.tools.idea.wizard.template.*
-import com.android.tools.idea.wizard.template.impl.activities.common.MIN_API
 import br.com.concrete.plugins.projecttemplate.base.enums.DependencyInjectionEnum
 import br.com.concrete.plugins.projecttemplate.base.models.SetupData
-import java.io.File
+import com.android.tools.idea.wizard.template.*
+import com.android.tools.idea.wizard.template.impl.activities.common.MIN_API
 
 val setupTemplate
     get() = template {
@@ -13,9 +12,9 @@ val setupTemplate
         description = "Creates a new project with Concrete Template"
         minApi = MIN_API
         minBuildApi = MIN_API
-        category = Category.Other
+        category = Category.Application
         formFactor = FormFactor.Mobile
-        screens = listOf(WizardUiContext.NewProject)
+        screens = listOf(WizardUiContext.NewProject, WizardUiContext.NewModule)
 
         val packageName = defaultPackageNameParameter
 
@@ -57,16 +56,26 @@ val setupTemplate
             help = "SDK que será usado para injeção de dependência"
         }
 
+        val isLauncher: BooleanParameter = booleanParameter {
+            name = "Launcher Activity"
+            visible = { !isNewModule }
+            default = false
+            help = "If true, this activity will have a CATEGORY_LAUNCHER intent filter, making it visible in the launcher"
+        }
+
         widgets(
             TextFieldWidget(activityClass),
             TextFieldWidget(layoutName),
             PackageNameWidget(packageName),
+            CheckBoxWidget(isLauncher),
             LanguageWidget(),
             CheckBoxWidget(addSharedTests),
             EnumWidget(dependencyInjection)
         )
 
-        thumb { File("concreteplugin.png") }
+
+    // TODO ícone do template
+    //  thumb { File("concreteplugin.png") }
 
         recipe = { data: TemplateData ->
             SetupData(
