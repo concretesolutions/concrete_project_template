@@ -17,7 +17,7 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
-        <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.WizardTemplateProviderImpl" />
+        <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.templates.WizardTemplateProviderImpl" />
     </extensions>
 
     <applicationListeners>

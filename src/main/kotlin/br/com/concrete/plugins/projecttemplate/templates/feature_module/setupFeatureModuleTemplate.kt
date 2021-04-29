@@ -7,7 +7,7 @@ import br.com.concrete.plugins.projecttemplate.templates.feature_module.base.mod
 import com.android.tools.idea.wizard.template.*
 import com.android.tools.idea.wizard.template.impl.activities.common.MIN_API
 
-val setupFeatureModule get() = template {
+val setupFeatureModuleTemplate get() = template {
 
     revision = 1
     name = "Módulo de feature"
@@ -17,8 +17,8 @@ val setupFeatureModule get() = template {
     category = Category.Other
     formFactor = FormFactor.Mobile
     screens = listOf(
-        WizardUiContext.FragmentGallery, WizardUiContext.MenuEntry,
-        WizardUiContext.NewProject, WizardUiContext.NewModule
+        WizardUiContext.MenuEntry,
+        WizardUiContext.NewModule
     )
 
     val packageName = defaultPackageNameParameter
