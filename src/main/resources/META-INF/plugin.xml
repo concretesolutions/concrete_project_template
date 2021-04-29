@@ -9,7 +9,20 @@
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.platform</depends>
 
+    <idea-version since-build="201"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyApplicationService"/>
+        <projectService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyProjectService"/>
+    </extensions>
+
     <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
         <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.WizardTemplateProviderImpl" />
     </extensions>
+
+    <applicationListeners>
+        <listener
+                class="br.com.concrete.plugins.projecttemplate.core.plugin.listeners.MyProjectManagerListener"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
 </idea-plugin>

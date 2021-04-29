@@ -11,6 +11,10 @@ plugins {
 group = properties("pluginGroup")
 version = properties("pluginVersion")
 
+if (!hasProperty("StudioCompilePath")) {
+    throw GradleException("No StudioCompilePath value was set, please create gradle.properties file")
+}
+
 repositories {
     mavenCentral()
 }
@@ -19,8 +23,6 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
-    compileOnly(files("lib/wizard-template.jar"))
 }
 
 intellij {
@@ -30,26 +32,38 @@ intellij {
     downloadSources = properties("platformDownloadSources").toBoolean()
     updateSinceUntilBuild = true
 
+    intellij.localPath = if (project.hasProperty("StudioRunPath")) properties("StudioRunPath") else properties("StudioRunPath")
     setPlugins(*properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toTypedArray())
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}
-
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes("""
-      Versão inicial do plugin para criar projeto seguindo recomendações da Concrete
-      """)
 }
 
 tasks {
     withType<JavaCompile> {
-        sourceCompatibility = "1.8"
-        targetCompatibility = "1.8"
+        sourceCompatibility = properties("jvmVersion")
+        targetCompatibility = properties("jvmVersion")
     }
 
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = properties("jvmVersion")
+    }
+
+    patchPluginXml {
+        version(properties("pluginVersion"))
+        sinceBuild(properties("pluginSinceBuild"))
+        untilBuild(properties("pluginUntilBuild"))
+
+        changeNotes("""
+            Versão inicial do plugin para criar projeto seguindo recomendações da Concrete
+            """
+        )
+    }
+
+    runPluginVerifier {
+        ideVersions(properties("pluginVerifierIdeVersions"))
+    }
+
+    publishPlugin {
+        dependsOn("patchChangelog")
+        token(System.getenv("PUBLISH_TOKEN"))
+        channels(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first())
     }
 }
