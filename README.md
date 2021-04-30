@@ -9,4 +9,4 @@ StudioCompilePath=/Applications/Android Studio.app/Contents
 StudioRunPath=/Applications/Android Studio.app/Contents
 
 Ignorar o seguinte erro no arquivo plugin.xml:
-<applicationListeners> Could not determine target platform version
+"<applicationListeners>" Could not determine target platform version

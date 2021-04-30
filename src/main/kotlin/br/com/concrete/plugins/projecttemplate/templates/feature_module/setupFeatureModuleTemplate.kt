@@ -25,7 +25,7 @@ val setupFeatureModuleTemplate get() = template {
 
     val featureName = stringParameter {
         name = "Nome da feature"
-        default = "Feature X"
+        default = "FeatureA"
         help = "Nome da feature que será criada"
         constraints = listOf(Constraint.NONEMPTY)
     }
@@ -35,6 +35,7 @@ val setupFeatureModuleTemplate get() = template {
         default = "MainActivity"
         help = "Nome da Activity que será criada"
         constraints = listOf(Constraint.CLASS, Constraint.UNIQUE, Constraint.NONEMPTY)
+        suggest = { "${featureName.value}Activity" }
     }
 
     val dependencyInjection = enumParameter<DependencyInjectionEnum> {
@@ -53,7 +54,7 @@ val setupFeatureModuleTemplate get() = template {
     //TODO ícone do template
     // thumb { File("concreteplugin.png") }
 
-    recipe = { data: TemplateData ->
+    recipe = {
         projectInstance?.let{ project ->
 
             FeatureModuleData(
@@ -63,7 +64,7 @@ val setupFeatureModuleTemplate get() = template {
                 activityName.value,
                 dependencyInjection.value
             ).let{
-                FeatureModuleProject(it).setup()
+                FeatureModuleTemplate(it).setup()
             }
 
         }
