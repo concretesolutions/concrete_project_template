@@ -10,3 +10,5 @@ StudioRunPath=/Applications/Android Studio.app/Contents
 
 Ignorar o seguinte erro no arquivo plugin.xml:
 "<applicationListeners>" Could not determine target platform version
+
+Para gerar o arquivo .jar do plugin, rode a task buildPlugin que está nas tasks de intellij do Gradle
