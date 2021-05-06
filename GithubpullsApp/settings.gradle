@@ -1,2 +1,4 @@
+enableFeaturePreview("VERSION_CATALOGS")
+
 rootProject.name = "Github pulls"
 include ':app'
