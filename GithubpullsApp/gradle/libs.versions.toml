@@ -3,6 +3,10 @@ navigation = "2.3.5"
 viewmodel = "2.3.1"
 espresso = "3.3.0"
 koin = "2.2.2"
+room = "2.3.0"
+moshi = "1.12.0"
+okhttp = "4.9.1"
+retrofit = "2.9.0"
 
 [libraries]
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
@@ -29,8 +33,30 @@ koin-viewmodel = { module = "org.koin:koin-androidx-viewmodel", version.ref = "k
 
 paging = { module = "androidx.paging:paging-runtime", version = "3.0.0" }
 
+retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-gsonconverter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref = "retrofit" }
+okhttp-core = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-logginginterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.4.3" }
+
 [bundles]
 navigation = ["navigation-fragment", "navigation-ui"]
 architectureEssentials = ["viewmodel-core", "viewmodel-livedata"]
 espressoEssentials = ["espresso-junit", "espresso-core"]
 koinViewModel = ["koin-core", "koin-viewmodel"]
+room = ["room-runtime", "room-ktx"]
+retrofit = [
+    "retrofit-core", "retrofit-moshi", "retrofit-gsonconverter",
+    "okhttp-core", "okhttp-logginginterceptor",
+    "moshi-core", "moshi-kotlin", "moshi-adapters"
+]
