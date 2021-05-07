@@ -1,22 +1,28 @@
 <idea-plugin>
-    <id>br.com.concrete.plugins.projecttemplate.Concrete Project Template</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <id>br.com.concrete.plugins.projecttemplate</id>
+    <name>Concrete Project Template</name>
+    <vendor url="https://medium.com/concretebr" email="sample@concrete.com.br">Concrete Solutions</vendor>
+    <description>Concrete Project Template is a plugin that helps developers to create new projects with predefined structure</description>
 
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-    ]]></description>
-
-    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
-         on how to target different products -->
+    <depends>org.jetbrains.android</depends>
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.platform</depends>
 
+    <idea-version since-build="201"/>
+
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <applicationService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyApplicationService"/>
+        <projectService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyProjectService"/>
     </extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-    </actions>
+    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+        <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.templates.WizardTemplateProviderImpl" />
+    </extensions>
+
+    <applicationListeners>
+        <listener
+                class="br.com.concrete.plugins.projecttemplate.core.plugin.listeners.MyProjectManagerListener"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
 </idea-plugin>
