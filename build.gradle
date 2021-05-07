@@ -21,7 +21,6 @@ subprojects { mainProject ->
     afterEvaluate { project ->
         def isAndroidModule = project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')
         if (isAndroidModule) {
-            println("Setting up module: " + project.name)
             android {
                 compileSdkVersion 30
 
