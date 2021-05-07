@@ -8,6 +8,5 @@ java {
 }
 
 dependencies {
-    implementation(libs.koin.core)
     implementation(libs.bundles.retrofit)
 }

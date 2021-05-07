@@ -22,6 +22,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.network)
+
     implementation(libs.material)
     implementation(libs.constraintlayout)
 

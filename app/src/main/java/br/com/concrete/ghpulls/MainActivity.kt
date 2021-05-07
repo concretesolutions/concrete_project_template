@@ -9,6 +9,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.concrete.ghpulls.databinding.ActivityMainBinding
+import br.com.concrete.network.GithubService
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
