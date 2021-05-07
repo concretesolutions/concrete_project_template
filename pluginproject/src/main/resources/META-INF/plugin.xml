@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>br.com.concrete.plugins.projecttemplate</id>
+    <name>Concrete Project Template</name>
+    <vendor url="https://medium.com/concretebr" email="sample@concrete.com.br">Concrete Solutions</vendor>
+    <description>Concrete Project Template is a plugin that helps developers to create new projects with predefined structure</description>
+
+    <depends>org.jetbrains.android</depends>
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.modules.platform</depends>
+
+    <idea-version since-build="201"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyApplicationService"/>
+        <projectService serviceImplementation="br.com.concrete.plugins.projecttemplate.core.plugin.services.MyProjectService"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.android.tools.idea.wizard.template">
+        <wizardTemplateProvider implementation="br.com.concrete.plugins.projecttemplate.templates.WizardTemplateProviderImpl" />
+    </extensions>
+
+    <applicationListeners>
+        <listener
+                class="br.com.concrete.plugins.projecttemplate.core.plugin.listeners.MyProjectManagerListener"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
+</idea-plugin>
