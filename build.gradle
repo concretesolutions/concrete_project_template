@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:4.2.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects { mainProject ->
+    afterEvaluate { project ->
+        def isAndroidModule = project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')
+        if (isAndroidModule) {
+            println("Setting up module: " + project.name)
+            android {
+                compileSdkVersion 30
+
+                defaultConfig {
+                    minSdkVersion 21
+                    targetSdkVersion 30
+                    versionCode 1
+                    versionName "1.0"
+                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                }
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+
+                kotlinOptions {
+                    jvmTarget = '1.8'
+                }
+            }
+        }
+    }
+}
