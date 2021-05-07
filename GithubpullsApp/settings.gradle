@@ -2,3 +2,7 @@ enableFeaturePreview("VERSION_CATALOGS")
 
 rootProject.name = "Github pulls"
 include ':app'
+include ':core:network'
+include ':core:database'
+include ':core:base'
+include ':feature:detail'
