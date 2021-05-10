@@ -2,11 +2,12 @@ package br.com.concrete.ghpulls
 
 import org.junit.Test
 
-import org.junit.Assert.*
+import org.koin.test.KoinTest
+import org.koin.test.check.checkModules
 
-class ExampleUnitTest {
+class CheckKoinModules : KoinTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun checkAllKoinModules() = checkModules {
+        modules(koinModules("https://example.com", false))
     }
 }
