@@ -27,7 +27,9 @@ class ReposAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RepositoryVo) {
             with(binding) {
-                title.text = item.name
+                repoName.text = item.name
+                userName.text = item.username
+
             }
         }
     }

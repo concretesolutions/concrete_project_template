@@ -5,6 +5,12 @@ import br.com.concrete.model.Repository
 
 class ReposMapper {
     fun mapModelToVo(repository: Repository) = RepositoryVo(
-        repository.name
+        id = repository.id,
+        name = repository.name,
+        description = repository.description,
+        starCount = repository.starCount,
+        forkCount = repository.forkCount,
+        username = repository.username,
+        userImageUrl = repository.userImageUrl,
     )
 }
