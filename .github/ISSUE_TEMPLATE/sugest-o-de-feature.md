@@ -16,5 +16,5 @@ Uma resposta clara e concisa do que deveria acontecer.
 **Descreva as alternativas que resolveriam este problema**
 Uma reposta clara e concisa das alternativas de solução ou funcionalidades que considerou.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Contexto adicional**
+Adiciona qualquer informações de contexto, screenshots etc que possam ser usados aqui.
