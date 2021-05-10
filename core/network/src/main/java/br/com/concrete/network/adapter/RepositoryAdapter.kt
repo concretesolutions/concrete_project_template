@@ -14,10 +14,10 @@ internal class RepositoryAdapter {
         }
     )
 
-    private fun repositoryDtoToModel(repositoryDto: RepositoryDto) = Repository(
+    internal fun repositoryDtoToModel(repositoryDto: RepositoryDto) = Repository(
         id = repositoryDto.id,
         name = repositoryDto.name,
-        description = repositoryDto.description ?: "",
+        description = repositoryDto.description ?: "No description provided",
         starCount = repositoryDto.starCount,
         forkCount = repositoryDto.forksCount,
         username = repositoryDto.owner.username,

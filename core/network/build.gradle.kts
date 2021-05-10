@@ -11,4 +11,6 @@ dependencies {
     implementation(projects.core.model)
     implementation(libs.koin.core)
     implementation(libs.bundles.retrofit)
+
+    testImplementation(libs.junit)
 }
