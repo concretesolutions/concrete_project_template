@@ -22,11 +22,14 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.base)
     implementation(projects.core.network)
+    implementation(projects.core.model)
 
     implementation(libs.material)
     implementation(libs.constraintlayout)
 
+    implementation(libs.retrofit.core)
     implementation(libs.ktx.core)
     implementation(libs.bundles.architectureEssentials)
     implementation(libs.bundles.koinViewModel)
