@@ -9,7 +9,7 @@ internal data class RepositoryWrapperDto(
 internal data class RepositoryDto(
     @Json(name = "id") val id: Int,
     @Json(name = "name") val name: String,
-    @Json(name = "description") val description: String,
+    @Json(name = "description") val description: String?,
     @Json(name = "owner") val owner: OwnerDto,
     @Json(name = "stargazers_count") val starCount: Int,
     @Json(name = "forks") val forksCount: Int,

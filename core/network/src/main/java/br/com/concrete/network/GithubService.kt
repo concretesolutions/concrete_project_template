@@ -1,12 +1,12 @@
 package br.com.concrete.network
 
-import br.com.concrete.network.wapper.RepositoryWrapper
+import br.com.concrete.model.RepositoryWrapper
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface GithubService {
-    @GET("search/repositories?q=language:Kotlin&sort=stars&page={pageNumber}")
-    fun getRepos(
-        @Path("pageNumber") pageNumber: Int,
+    @GET("search/repositories?q=language:Kotlin&sort=stars")
+    suspend fun getRepos(
+        @Query("page") pageNumber: Int,
     ): RepositoryWrapper
 }
