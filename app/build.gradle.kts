@@ -28,6 +28,7 @@ dependencies {
 
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.bundles.glide)
 
     implementation(libs.retrofit.core)
     implementation(libs.ktx.core)

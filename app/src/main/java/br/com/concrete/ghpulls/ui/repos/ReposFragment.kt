@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
+import br.com.concrete.ghpulls.util.ItemVerticalSpaceDecorator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -35,6 +37,9 @@ class ReposFragment : Fragment() {
 
     private fun setupViews() {
         binding.reposList.adapter = reposAdapter
+        binding.reposList.addItemDecoration(
+            ItemVerticalSpaceDecorator(R.dimen.default_margin)
+        )
 
         lifecycleScope.launch {
             reposViewModel.kotlinReposPager.collectLatest {

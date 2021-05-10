@@ -7,6 +7,7 @@ room = "2.3.0"
 moshi = "1.12.0"
 okhttp = "4.9.1"
 retrofit = "2.9.0"
+glide = "4.12.0"
 
 [libraries]
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
@@ -49,6 +50,9 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.4.3" }
 
+glide-core = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+
 [bundles]
 navigation = ["navigation-fragment", "navigation-ui"]
 architectureEssentials = ["viewmodel-core", "viewmodel-livedata"]
@@ -60,3 +64,4 @@ retrofit = [
     "okhttp-core", "okhttp-logginginterceptor",
     "moshi-core", "moshi-kotlin", "moshi-adapters"
 ]
+glide = ["glide-core", "glide-compiler"]

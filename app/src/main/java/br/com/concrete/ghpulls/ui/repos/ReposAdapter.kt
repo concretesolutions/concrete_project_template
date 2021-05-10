@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.concrete.ghpulls.databinding.ItemRepoBinding
+import br.com.concrete.ghpulls.util.extension.loadUrl
 import br.com.concrete.ghpulls.ui.repos.vo.RepositoryVo
 
 class ReposAdapter :
@@ -29,7 +30,9 @@ class ReposAdapter :
             with(binding) {
                 repoName.text = item.name
                 userName.text = item.username
-
+                avatar.loadUrl(item.userImageUrl)
+                description.text = item.description
+                metricsInfo.text = item.metricsInfo
             }
         }
     }

@@ -8,7 +8,8 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/divider"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:layout_width="@dimen/repo_avatar_size"
             android:layout_height="@dimen/repo_avatar_size"
             android:layout_marginStart="@dimen/default_margin"
+            android:importantForAccessibility="no"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/ShapeRoundImage"
@@ -30,12 +32,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textColor="@color/black"
             tools:text="android-samples from" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             tools:text="android" />
 
         <androidx.constraintlayout.helper.widget.Flow
@@ -93,12 +97,13 @@
             android:layout_height="wrap_content"
             tools:text="3000 stars   700 forks" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/favorite_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/favorite" />
+            android:text="@string/favorite"
+            app:backgroundTint="@color/primaryColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

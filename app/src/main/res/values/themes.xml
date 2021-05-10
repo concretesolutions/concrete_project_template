@@ -1,9 +1,9 @@
 <resources>
 
-    <style name="Theme.GithubPulls" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.GithubPulls" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorOnPrimary">@color/primaryDarkColor</item>
 
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>

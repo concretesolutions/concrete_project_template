@@ -4,10 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 
 data class RepositoryVo(
     val id: Int,
-    val name: String,
+    val name: CharSequence,
     val description: String,
-    val starCount: Int,
-    val forkCount: Int,
+    val metricsInfo: CharSequence,
     val username: String,
     val userImageUrl: String
 ) {
