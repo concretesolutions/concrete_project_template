@@ -1,12 +1,16 @@
 package br.com.concrete.ghpulls.ui.repos
 
+import android.content.Context
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
+import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.ui.repos.vo.RepositoryVo
 import br.com.concrete.model.Repository
 
-class ReposMapper {
+class ReposMapper(
+    private val context: Context
+) {
     fun mapModelToVo(repository: Repository) = RepositoryVo(
         id = repository.id,
         name = buildSpannedString {
@@ -15,7 +19,7 @@ class ReposMapper {
             }
 
             italic {
-                append(" from")
+                append(context.getString(R.string.reponame_sufix))
             }
         },
         description = repository.description,
@@ -25,7 +29,12 @@ class ReposMapper {
             }
 
             italic {
-                append(" stars")
+                append(
+                    context.resources.getQuantityString(
+                        R.plurals.repostars_sufix,
+                        repository.starCount
+                    )
+                )
             }
 
             bold {
@@ -33,7 +42,12 @@ class ReposMapper {
             }
 
             italic {
-                append(" forks")
+                append(
+                    context.resources.getQuantityString(
+                        R.plurals.repoforks_sufix,
+                        repository.forkCount
+                    )
+                )
             }
         },
         username = repository.username,

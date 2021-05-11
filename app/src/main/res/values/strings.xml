@@ -6,4 +6,15 @@
     <string name="error_loading_content">Error loading content</string>
     <string name="try_again">Try again</string>
     <string name="error_loading_repos">Error getting Kotlin Repos</string>
+    <string name="reponame_sufix">" from"</string>
+
+    <plurals name="repostars_sufix">
+        <item quantity="one">\u0020star</item>
+        <item quantity="other">\u0020stars</item>
+    </plurals>
+
+    <plurals name="repoforks_sufix">
+        <item quantity="one">\u0020fork</item>
+        <item quantity="other">\u0020forks</item>
+    </plurals>
 </resources>
