@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="favorite">Favoritar</string>
+    <string name="error_loading_content">Error loading content</string>
+    <string name="try_again">Try again</string>
 </resources>

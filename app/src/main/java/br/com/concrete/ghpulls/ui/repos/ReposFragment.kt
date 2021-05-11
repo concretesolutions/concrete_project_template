@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
 import br.com.concrete.ghpulls.util.ItemVerticalSpaceDecorator
+import br.com.concrete.ghpulls.util.adapter.LoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -19,6 +20,9 @@ class ReposFragment : Fragment() {
 
     private lateinit var binding: FragmentReposBinding
     private val reposAdapter = ReposAdapter()
+    private val loadState = LoadStateAdapter {
+        reposAdapter.retry()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +40,7 @@ class ReposFragment : Fragment() {
     }
 
     private fun setupViews() {
-        binding.reposList.adapter = reposAdapter
+        binding.reposList.adapter = reposAdapter.withLoadStateFooter(loadState)
         binding.reposList.addItemDecoration(
             ItemVerticalSpaceDecorator(R.dimen.default_margin)
         )
