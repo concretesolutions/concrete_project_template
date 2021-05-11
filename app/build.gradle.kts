@@ -38,8 +38,8 @@ dependencies {
 
     implementation(libs.bundles.navigation)
 
-    testImplementation(libs.junit)
     testImplementation(libs.koin.test)
+    testImplementation(libs.bundles.junitandroid)
 
     androidTestImplementation(libs.bundles.espressoEssentials)
 }
