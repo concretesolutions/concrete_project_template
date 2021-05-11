@@ -1,15 +1,18 @@
 package br.com.concrete.ghpulls.ui.repos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
+import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.ghpulls.util.ItemVerticalSpaceDecorator
 import br.com.concrete.ghpulls.util.adapter.LoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
@@ -21,7 +24,7 @@ class ReposFragment : Fragment() {
     private val reposViewModel: ReposViewModel by inject()
 
     private lateinit var binding: FragmentReposBinding
-    private val reposAdapter = ReposAdapter()
+    private lateinit var reposAdapter: ReposAdapter
     private val loadState = LoadStateAdapter {
         reposAdapter.retry()
     }
@@ -32,6 +35,7 @@ class ReposFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentReposBinding.inflate(inflater, container, false)
+        reposAdapter = ReposAdapter(reposClickCallback)
         return binding.root
     }
 
@@ -69,5 +73,19 @@ class ReposFragment : Fragment() {
                     binding.errorGroup.isVisible = loadState.refresh is LoadState.Error
                 }
         }
+    }
+
+    private val reposClickCallback: ReposClickCallback = object : ReposClickCallback {
+        override fun onClick(item: RepoBaseVo.RepositoryVo?) {
+            if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "ola mundo : " + item?.description)
+//                (activity as MainActivity).show(item)
+
+            }
+        }
+    }
+
+    companion object {
+        const val TAG = "ReposFragment"
     }
 }

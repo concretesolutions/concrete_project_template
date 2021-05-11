@@ -10,7 +10,7 @@ import br.com.concrete.ghpulls.databinding.ItemRepoBinding
 import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.ghpulls.util.extension.loadUrl
 
-class ReposAdapter :
+class ReposAdapter (private val reposClickCallback: ReposClickCallback?) :
     PagingDataAdapter<RepoBaseVo, RecyclerView.ViewHolder>(RepoBaseVo.diffUtil) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
@@ -34,9 +34,12 @@ class ReposAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
+        val reposBinding = ItemRepoBinding.inflate(layoutInflater, parent, false)
+        reposBinding.callback = reposClickCallback
+
         return when (viewType) {
             R.layout.item_repo -> RepositoryItemViewHolder(
-                ItemRepoBinding.inflate(layoutInflater, parent, false)
+                reposBinding
             )
             else -> HeaderItemViewHolder(
                 ItemHeaderRepoBinding.inflate(layoutInflater, parent, false)
@@ -49,6 +52,7 @@ class ReposAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RepoBaseVo.RepositoryVo) {
             with(binding) {
+                binding.item = item
                 repoName.text = item.name
                 userName.text = item.username
                 avatar.loadUrl(item.userImageUrl)
