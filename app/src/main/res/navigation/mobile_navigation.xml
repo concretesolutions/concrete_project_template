@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="br.com.concrete.ghpulls.ui.home.HomeFragment"
+        android:name="br.com.concrete.ghpulls.ui.repos.ReposFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_repos" />
 
     <fragment
         android:id="@+id/navigation_search"

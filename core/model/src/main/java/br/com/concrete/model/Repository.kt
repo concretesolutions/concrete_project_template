@@ -9,3 +9,7 @@ data class Repository(
     val username: String,
     val userImageUrl: String
 )
+
+data class RepositoryWrapper(
+    val repositories: List<Repository>,
+)
