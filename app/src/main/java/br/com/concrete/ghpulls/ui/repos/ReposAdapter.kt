@@ -4,35 +4,66 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.concrete.ghpulls.R
+import br.com.concrete.ghpulls.databinding.ItemHeaderRepoBinding
 import br.com.concrete.ghpulls.databinding.ItemRepoBinding
+import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.ghpulls.util.extension.loadUrl
-import br.com.concrete.ghpulls.ui.repos.vo.RepositoryVo
 
 class ReposAdapter :
-    PagingDataAdapter<RepositoryVo, ReposAdapter.ViewHolder>(RepositoryVo.diffUtil) {
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    PagingDataAdapter<RepoBaseVo, RecyclerView.ViewHolder>(RepoBaseVo.diffUtil) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.bind(item)
+            if (holder is RepositoryItemViewHolder) {
+                holder.bind(item as RepoBaseVo.RepositoryVo)
+            }
+
+            if (holder is HeaderItemViewHolder) {
+                holder.bind(item as RepoBaseVo.Header)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemRepoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is RepoBaseVo.RepositoryVo -> R.layout.item_repo
+            else -> R.layout.item_header_repo
+        }
     }
 
-    class ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            R.layout.item_repo -> RepositoryItemViewHolder(
+                ItemRepoBinding.inflate(layoutInflater, parent, false)
+            )
+            else -> HeaderItemViewHolder(
+                ItemHeaderRepoBinding.inflate(layoutInflater, parent, false)
+            )
+        }
+    }
+
+    class RepositoryItemViewHolder(
         private val binding: ItemRepoBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: RepositoryVo) {
+        fun bind(item: RepoBaseVo.RepositoryVo) {
             with(binding) {
                 repoName.text = item.name
                 userName.text = item.username
                 avatar.loadUrl(item.userImageUrl)
                 description.text = item.description
                 metricsInfo.text = item.metricsInfo
+            }
+        }
+    }
+
+    class HeaderItemViewHolder(
+        private val binding: ItemHeaderRepoBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: RepoBaseVo.Header) {
+            with(binding) {
+                title.setText(item.titleRes)
             }
         }
     }

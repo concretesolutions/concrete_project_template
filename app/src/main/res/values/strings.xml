@@ -7,6 +7,7 @@
     <string name="try_again">Try again</string>
     <string name="error_loading_repos">Error getting Kotlin Repos</string>
     <string name="reponame_sufix">" from"</string>
+    <string name="others">Others</string>
 
     <plurals name="repostars_sufix">
         <item quantity="one">\u0020star</item>

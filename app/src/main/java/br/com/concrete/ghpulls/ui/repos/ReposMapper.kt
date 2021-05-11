@@ -5,13 +5,13 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
 import br.com.concrete.ghpulls.R
-import br.com.concrete.ghpulls.ui.repos.vo.RepositoryVo
+import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.model.Repository
 
 class ReposMapper(
     private val context: Context
 ) {
-    fun mapModelToVo(repository: Repository) = RepositoryVo(
+    fun mapModelToVo(repository: Repository) = RepoBaseVo.RepositoryVo(
         id = repository.id,
         name = buildSpannedString {
             bold {

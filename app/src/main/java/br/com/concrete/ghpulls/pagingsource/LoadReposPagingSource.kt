@@ -8,8 +8,7 @@ import java.io.IOException
 
 class LoadReposPagingSource(
     private val loadReposAction: suspend (pageNumber: Int) -> List<Repository>,
-) :
-    PagingSource<Int, Repository>() {
+) : PagingSource<Int, Repository>() {
     override fun getRefreshKey(state: PagingState<Int, Repository>) = FIRST_PAGE
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Repository> {
