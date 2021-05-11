@@ -1,4 +1,11 @@
-# Issue Template
+---
+name: Reportar problema
+about: Crie um relatório para nos ajudar a melhorar este repositório
+title: "[BUG]"
+labels: bug
+assignees: ''
+
+---
 
 ## Prerequisitos
 
