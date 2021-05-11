@@ -1,17 +1,16 @@
 package br.com.concrete.ghpulls.ui.repos
 
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import br.com.concrete.model.Repository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
+import org.koin.test.inject
 
 @RunWith(AndroidJUnit4::class)
-class ReposMapperTest {
-    private val reposMapper by lazy {
-        ReposMapper(getApplicationContext())
-    }
+class ReposMapperTest : AutoCloseKoinTest() {
+    private val reposMapper: ReposMapper by inject()
 
     @Test
     fun mapModelToVo_isCorrect() {

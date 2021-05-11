@@ -5,12 +5,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.test.AutoCloseKoinTest
 
 import org.koin.test.KoinTest
 import org.koin.test.check.checkModules
 
 @RunWith(AndroidJUnit4::class)
-class CheckKoinModulesTest {
+class CheckKoinModulesTest : AutoCloseKoinTest() {
     @Test
     fun checkAllKoinModules() {
         checkModules {
