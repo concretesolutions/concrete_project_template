@@ -14,7 +14,6 @@ class ReposViewModel(
     githubService: GithubService,
     reposMapper: ReposMapper,
 ) : ViewModel() {
-
     val kotlinReposPager = Pager(
         PagingConfig(pageSize = DEFAULT_PAGE_SIZE)
     ) {
@@ -25,14 +24,12 @@ class ReposViewModel(
         .map { it.map { repo -> reposMapper.mapModelToVo(repo) } }
         .map {
             it.insertSeparators { before, _ ->
-                when (before) {
-                    null -> {
-                        RepoBaseVo.Header(R.string.others)
-                    }
-                    else -> null
+                if (before == null) {
+                    RepoBaseVo.Header(R.string.others)
+                } else {
+                    null
                 }
             }
         }
         .cachedIn(viewModelScope)
-
 }
