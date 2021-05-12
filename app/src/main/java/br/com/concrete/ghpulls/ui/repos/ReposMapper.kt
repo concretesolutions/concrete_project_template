@@ -22,6 +22,16 @@ class ReposMapper(
         starCount = 0
     )
 
+    fun mapRepositoryEntityToRepository(repositoryEntity: RepositoryEntity) = Repository(
+        id = repositoryEntity.id,
+        name = repositoryEntity.name.toString(),
+        description =  repositoryEntity.description,
+        username = repositoryEntity.username,
+        userImageUrl = repositoryEntity.userImageUrl,
+        forkCount = 0,
+        starCount = 0
+    )
+
     fun mapModelToVo(repository: Repository) = RepoBaseVo.RepositoryVo(
         id = repository.id,
         name = buildSpannedString {

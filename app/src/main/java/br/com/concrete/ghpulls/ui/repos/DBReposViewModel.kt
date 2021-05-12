@@ -3,11 +3,16 @@ package br.com.concrete.ghpulls.ui.repos
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.*
+import br.com.concrete.base.DEFAULT_PAGE_SIZE
 import br.com.concrete.database.DBReposService
 import br.com.concrete.database.dao.FavoritesDao
 import br.com.concrete.database.entity.RepositoryEntity
+import br.com.concrete.ghpulls.R
+import br.com.concrete.ghpulls.pagingsource.LoadReposPagingSource
 import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DBReposViewModel (
@@ -33,6 +38,33 @@ class DBReposViewModel (
                 favoritesDao.insert(reposMapper.mapVoToModel(repoVo))
         }
     }
+
+
+
+    val kotlinReposPager = Pager(
+        PagingConfig(pageSize = DEFAULT_PAGE_SIZE)
+    ) {
+        LoadReposPagingSource { pageNumber ->
+            favoritesDao.getAllFavorites().map {
+                    repo -> reposMapper.mapRepositoryEntityToRepository(repo)
+            }
+        }
+    }.flow
+        .map { it.map { repo -> reposMapper.mapModelToVo(repo) } }
+        .map {
+            it.insertSeparators { before, _ ->
+                if (before == null) {
+                    RepoBaseVo.Header(R.string.favorites)
+                } else {
+                    null
+                }
+            }
+        }
+        .cachedIn(viewModelScope)
+
+
+
+
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

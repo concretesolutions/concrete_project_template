@@ -7,5 +7,6 @@ plugins {
 dependencies {
     implementation(libs.koin.core)
     implementation(libs.bundles.room)
+    implementation(projects.core.model)
     kapt(libs.room.compiler)
 }
