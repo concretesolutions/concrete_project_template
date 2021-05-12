@@ -22,6 +22,7 @@ import org.koin.android.ext.android.inject
 class ReposFragment : Fragment() {
 
     private val reposViewModel: ReposViewModel by inject()
+    private val dbReposViewModel: DBReposViewModel by inject()
 
     private lateinit var binding: FragmentReposBinding
     private lateinit var reposAdapter: ReposAdapter
@@ -78,8 +79,15 @@ class ReposFragment : Fragment() {
     private val reposClickCallback: ReposClickCallback = object : ReposClickCallback {
         override fun onClick(item: RepoBaseVo.RepositoryVo?) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                Log.d(TAG, "ola mundo : " + item?.description)
+                Log.d(TAG, "repo name : " + item?.name)
 //                (activity as MainActivity).show(item)
+
+                if (item != null) {
+                    dbReposViewModel.insert(item)
+                }
+
+                Log.d(TAG, "fav size : " + dbReposViewModel.getAllFavs().size)
+
 
             }
         }

@@ -23,5 +23,5 @@ fun koinModules(
 ): List<Module> {
     val networkModule = networkModule(baseUrl, enableLog)
     val databaseModule = databaseModule(context)
-    return listOf(networkModule, reposModule)
+    return listOf(networkModule, reposModule, databaseModule)
 }
