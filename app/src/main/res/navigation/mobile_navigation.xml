@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="br.com.concrete.ghpulls.ui.search.DashboardFragment"
+        android:name="br.com.concrete.ghpulls.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_dashboard" />
 
