@@ -8,5 +8,7 @@ interface GithubService {
     @GET("search/repositories?q=language:Kotlin&sort=stars")
     suspend fun getRepos(
         @Query("page") pageNumber: Int,
+        @Query ( "q") query: String? = null,
     ): RepositoryWrapper
+
 }
