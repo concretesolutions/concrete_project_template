@@ -16,6 +16,7 @@ import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.ghpulls.util.ItemVerticalSpaceDecorator
 import br.com.concrete.ghpulls.util.adapter.LoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -63,6 +64,13 @@ class ReposFragment : Fragment() {
         }
 
         lifecycleScope.launch {
+//            reposViewModel.kotlinReposPager.combine(dbReposViewModel.kotlinReposPager)
+            dbReposViewModel.kotlinReposPager.collectLatest {
+                reposAdapter.submitData(it)
+            }
+        }
+
+        lifecycleScope.launch {
             reposAdapter.loadStateFlow
                 .collectLatest { loadState ->
                     if (loadState.refresh is LoadState.Loading) {
@@ -84,6 +92,7 @@ class ReposFragment : Fragment() {
 
                 if (item != null) {
                     dbReposViewModel.insert(item)
+                    dbReposViewModel.getAllFavs()
                 }
 
                 Log.d(TAG, "fav size : " + dbReposViewModel.getAllFavs().size)

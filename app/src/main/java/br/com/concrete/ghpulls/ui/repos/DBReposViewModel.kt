@@ -45,7 +45,7 @@ class DBReposViewModel (
         PagingConfig(pageSize = DEFAULT_PAGE_SIZE)
     ) {
         LoadReposPagingSource { pageNumber ->
-            favoritesDao.getAllFavorites().map {
+            listAllFavs.map {
                     repo -> reposMapper.mapRepositoryEntityToRepository(repo)
             }
         }
@@ -67,11 +67,9 @@ class DBReposViewModel (
 
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            listAllFavs = favoritesDao.getAllFavorites()
-            Log.d(TAG, "init fav size : " + listAllFavs.size)
-        }
+        getAllFavs()
     }
+
 
     companion object {
         const val TAG = "DBReposViewModel"
