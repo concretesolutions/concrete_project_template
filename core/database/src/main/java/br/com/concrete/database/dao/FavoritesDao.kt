@@ -1,5 +1,6 @@
 package br.com.concrete.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,7 +14,7 @@ interface FavoritesDao {
     fun insert(repository: RepositoryEntity)
 
     @Query("SELECT * FROM repo_table")
-    fun getAllFavorites(): List<RepositoryEntity>
+    fun getAllFavorites(): PagingSource<Int, RepositoryEntity>
 
     @Query("SELECT * FROM repo_table WHERE id = :id")
     fun getFavById(id: Int): RepositoryEntity?

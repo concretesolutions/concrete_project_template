@@ -21,7 +21,7 @@ class ReposViewModel(
             githubService.getRepos(pageNumber).repositories
         }
     }.flow
-        .map { it.map { repo -> reposMapper.mapModelToVo(repo) } }
+        .map { it.map { repo -> reposMapper.mapRepositoryToVo(repo) } }
         .map {
             it.insertSeparators { before, _ ->
                 if (before == null) {

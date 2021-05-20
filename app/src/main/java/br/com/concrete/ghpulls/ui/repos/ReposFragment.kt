@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
 import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
@@ -27,6 +28,8 @@ class ReposFragment : Fragment() {
 
     private lateinit var binding: FragmentReposBinding
     private lateinit var reposAdapter: ReposAdapter
+    private lateinit var reposDBAdapter: ReposFavsAdapter
+    lateinit var adapter: ConcatAdapter
     private val loadState = LoadStateAdapter {
         reposAdapter.retry()
     }
@@ -38,6 +41,7 @@ class ReposFragment : Fragment() {
     ): View {
         binding = FragmentReposBinding.inflate(inflater, container, false)
         reposAdapter = ReposAdapter(reposClickCallback)
+        reposDBAdapter = ReposFavsAdapter(reposClickCallback)
         return binding.root
     }
 
@@ -48,7 +52,13 @@ class ReposFragment : Fragment() {
     }
 
     private fun setupViews() {
-        binding.reposList.adapter = reposAdapter.withLoadStateFooter(loadState)
+        val listOfAdapters = listOf(
+            reposDBAdapter,
+            reposAdapter.withLoadStateFooter(loadState))
+        adapter = ConcatAdapter(listOfAdapters)
+
+        binding.reposList.adapter = adapter
+
         binding.reposList.addItemDecoration(
             ItemVerticalSpaceDecorator(R.dimen.default_margin)
         )
@@ -64,9 +74,8 @@ class ReposFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-//            reposViewModel.kotlinReposPager.combine(dbReposViewModel.kotlinReposPager)
-            dbReposViewModel.kotlinReposPager.collectLatest {
-                reposAdapter.submitData(it)
+            dbReposViewModel.kotlinDBReposPager.collectLatest {
+                reposDBAdapter.submitData(it)
             }
         }
 
@@ -88,16 +97,12 @@ class ReposFragment : Fragment() {
         override fun onClick(item: RepoBaseVo.RepositoryVo?) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 Log.d(TAG, "repo name : " + item?.name)
-//                (activity as MainActivity).show(item)
 
                 if (item != null) {
                     dbReposViewModel.insert(item)
                     dbReposViewModel.getAllFavs()
                 }
-
-                Log.d(TAG, "fav size : " + dbReposViewModel.getAllFavs().size)
-
-
+//                Log.d(TAG, "fav size : " + dbReposViewModel.getAllFavs().size)
             }
         }
     }

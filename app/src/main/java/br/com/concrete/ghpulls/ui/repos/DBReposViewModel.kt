@@ -20,13 +20,12 @@ class DBReposViewModel (
     private val reposMapper: ReposMapper,
 ) : ViewModel() {
 
-    var listAllFavs: List<RepositoryEntity> = listOf()
+    var listAllFavs: PagingSource<Int,RepositoryEntity> = getAllFavs()
 
-    fun getAllFavs(): List<RepositoryEntity> {
-//        var allFavs: List<RepositoryEntity> = listOf()
+    fun getAllFavs(): PagingSource<Int, RepositoryEntity> {
         viewModelScope.launch(Dispatchers.IO) {
             listAllFavs = favoritesDao.getAllFavorites()
-            Log.d(TAG, "favs size : " + listAllFavs.size)
+//            Log.d(TAG, "getAllFavs() favs size : " + listAllFavs.size)
         }
         return listAllFavs
     }
@@ -39,16 +38,12 @@ class DBReposViewModel (
         }
     }
 
-
-
-    val kotlinReposPager = Pager(
-        PagingConfig(pageSize = DEFAULT_PAGE_SIZE)
-    ) {
-        LoadReposPagingSource { pageNumber ->
-            listAllFavs.map {
-                    repo -> reposMapper.mapRepositoryEntityToRepository(repo)
-            }
-        }
+    val kotlinDBReposPager = Pager(
+        config =  PagingConfig(DEFAULT_PAGE_SIZE)
+//        ,
+//        remoteMediator = itemRemoteMediator
+    ){
+        listAllFavs
     }.flow
         .map { it.map { repo -> reposMapper.mapModelToVo(repo) } }
         .map {
@@ -61,10 +56,6 @@ class DBReposViewModel (
             }
         }
         .cachedIn(viewModelScope)
-
-
-
-
 
     init {
         getAllFavs()
