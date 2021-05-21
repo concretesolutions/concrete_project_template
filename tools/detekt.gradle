@@ -10,12 +10,12 @@ detekt {
     parallel = true
 
     reports {
-        xml {
+        xml {git ad
             enabled = false
         }
     }
 }
 
 dependencies {
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
+    detektPlugins libs.detekt.formatting
 }

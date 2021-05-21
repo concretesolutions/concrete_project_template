@@ -1,19 +1,14 @@
 buildscript {
-    ext.detekt_version = "1.17.0"
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.17.0")
+        classpath(libs.androidgradle.plugin)
+        classpath(libs.kotlin.plugin)
+        classpath(libs.detekt.plugin)
     }
-}
-
-plugins {
-    id "io.gitlab.arturbosch.detekt" version "1.17.0"
 }
 
 allprojects {
