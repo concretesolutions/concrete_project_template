@@ -10,7 +10,7 @@ detekt {
     parallel = true
 
     reports {
-        xml {git ad
+        xml {
             enabled = false
         }
     }

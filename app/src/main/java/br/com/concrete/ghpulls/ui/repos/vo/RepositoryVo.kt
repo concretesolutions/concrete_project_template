@@ -26,4 +26,3 @@ sealed class RepoBaseVo {
         }
     }
 }
-
