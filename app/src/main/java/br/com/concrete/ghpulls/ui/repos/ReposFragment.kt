@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
@@ -69,7 +70,7 @@ class ReposFragment : Fragment() {
 
         lifecycleScope.launch {
             reposViewModel.kotlinReposPager.collectLatest {
-                reposAdapter.submitData(it)
+                reposAdapter.submitData(it as PagingData<RepoBaseVo>)
             }
         }
 

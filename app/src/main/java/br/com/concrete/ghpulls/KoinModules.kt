@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 private val reposModule = module {
     factory { ReposMapper(get()) }
-    viewModel { ReposViewModel(get(), get()) }
+    viewModel { ReposViewModel(get(), get(), get()) }
     viewModel { DBReposViewModel(get(), get()) }
 }
 

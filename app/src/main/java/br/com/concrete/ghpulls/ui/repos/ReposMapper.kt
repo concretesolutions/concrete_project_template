@@ -15,7 +15,7 @@ class ReposMapper(
     fun mapVoToModel(repoVo: RepoBaseVo.RepositoryVo) = RepositoryEntity(
         id = repoVo.id,
         name = repoVo.name.toString(),
-        description =  repoVo.description,
+        description = repoVo.description,
         username = repoVo.username,
         userImageUrl = repoVo.userImageUrl,
         forkCount = 0,
