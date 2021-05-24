@@ -25,6 +25,7 @@ android {
 dependencies {
     implementation(projects.core.base)
     implementation(projects.core.network)
+    implementation(projects.core.database)
     implementation(projects.core.model)
 
     implementation(libs.material)

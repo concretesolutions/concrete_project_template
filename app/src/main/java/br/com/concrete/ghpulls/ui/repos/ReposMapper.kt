@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.italic
+import br.com.concrete.database.entity.RepositoryEntity
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.model.Repository
@@ -11,7 +12,10 @@ import br.com.concrete.model.Repository
 class ReposMapper(
     private val context: Context
 ) {
-    fun mapModelToVo(repository: Repository) = RepoBaseVo.RepositoryVo(
+    fun mapModelToVo(
+        repository: Repository,
+        favoriteIds: List<Int>
+    ): RepoBaseVo = RepoBaseVo.RepositoryVo(
         id = repository.id,
         name = buildSpannedString {
             bold {
@@ -52,5 +56,7 @@ class ReposMapper(
         },
         username = repository.username,
         userImageUrl = repository.userImageUrl,
+        repositoryModel = repository,
+        isFavorite = favoriteIds.contains(repository.id)
     )
 }

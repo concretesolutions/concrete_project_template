@@ -13,7 +13,8 @@ class App : Application() {
 
             val appModules = koinModules(
                 getString(R.string.base_url_github_api),
-                BuildConfig.DEBUG
+                BuildConfig.DEBUG,
+                this@App
             )
             modules(appModules)
         }
