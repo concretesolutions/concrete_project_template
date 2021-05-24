@@ -1,16 +1,13 @@
 package br.com.concrete.ghpulls.ui.repos
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.databinding.FragmentReposBinding
@@ -18,7 +15,6 @@ import br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo
 import br.com.concrete.ghpulls.util.ItemVerticalSpaceDecorator
 import br.com.concrete.ghpulls.util.adapter.LoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -28,9 +24,13 @@ class ReposFragment : Fragment() {
     private val dbReposViewModel: DBReposViewModel by inject()
 
     private lateinit var binding: FragmentReposBinding
-    private lateinit var reposAdapter: ReposAdapter
-    private lateinit var reposDBAdapter: ReposFavsAdapter
-    lateinit var adapter: ConcatAdapter
+
+    private val clickAction: (RepoBaseVo.RepositoryVo) -> Unit = { repositoryVo ->
+        onFavoriteUnfavoriteRepo(repositoryVo)
+    }
+    private val reposDBAdapter = ReposAdapter(clickAction)
+    private val reposAdapter = ReposAdapter(clickAction)
+
     private val loadState = LoadStateAdapter {
         reposAdapter.retry()
     }
@@ -41,9 +41,11 @@ class ReposFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentReposBinding.inflate(inflater, container, false)
-        reposAdapter = ReposAdapter(reposClickCallback)
-        reposDBAdapter = ReposFavsAdapter(reposClickCallback)
         return binding.root
+    }
+
+    private fun onFavoriteUnfavoriteRepo(repositoryVo: RepoBaseVo.RepositoryVo) {
+        dbReposViewModel.favoriteUnfavoriteRepository(repositoryVo)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,13 +55,10 @@ class ReposFragment : Fragment() {
     }
 
     private fun setupViews() {
-        val listOfAdapters = listOf(
+        binding.reposList.adapter = ConcatAdapter(
             reposDBAdapter,
-            reposAdapter.withLoadStateFooter(loadState))
-        adapter = ConcatAdapter(listOfAdapters)
-
-        binding.reposList.adapter = adapter
-
+            reposAdapter.withLoadStateFooter(loadState)
+        )
         binding.reposList.addItemDecoration(
             ItemVerticalSpaceDecorator(R.dimen.default_margin)
         )
@@ -70,7 +69,7 @@ class ReposFragment : Fragment() {
 
         lifecycleScope.launch {
             reposViewModel.kotlinReposPager.collectLatest {
-                reposAdapter.submitData(it as PagingData<RepoBaseVo>)
+                reposAdapter.submitData(it)
             }
         }
 
@@ -89,26 +88,12 @@ class ReposFragment : Fragment() {
                         binding.progress.hide()
                     }
 
-                    binding.errorGroup.isVisible = loadState.refresh is LoadState.Error
+//                    binding.errorGroup.isVisible = loadState.refresh is LoadState.Error
                 }
         }
-    }
 
-    private val reposClickCallback: ReposClickCallback = object : ReposClickCallback {
-        override fun onClick(item: RepoBaseVo.RepositoryVo?) {
-            if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                Log.d(TAG, "repo name : " + item?.name)
-
-                if (item != null) {
-                    dbReposViewModel.insert(item)
-                    dbReposViewModel.getAllFavs()
-                }
-//                Log.d(TAG, "fav size : " + dbReposViewModel.getAllFavs().size)
-            }
+        dbReposViewModel.refreshNetworkDb.observe(viewLifecycleOwner) {
+            reposAdapter.refresh()
         }
-    }
-
-    companion object {
-        const val TAG = "ReposFragment"
     }
 }

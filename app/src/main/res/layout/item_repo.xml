@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <variable name="item" type="br.com.concrete.ghpulls.ui.repos.vo.RepoBaseVo.RepositoryVo"/>
-        <variable name="callback" type="br.com.concrete.ghpulls.ui.repos.ReposClickCallback"/>
-    </data>
-
-<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -111,10 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/favorite"
-            app:backgroundTint="@color/primaryColor"
-            android:onClick="@{() ->  callback.onClick(item)}"/>
+            app:backgroundTint="@color/primaryColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
-
-</layout>
