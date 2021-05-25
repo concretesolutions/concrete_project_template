@@ -3,14 +3,11 @@ package br.com.concrete.ghpulls
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.concrete.ghpulls.databinding.ActivityMainBinding
-import br.com.concrete.network.GithubService
-import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 

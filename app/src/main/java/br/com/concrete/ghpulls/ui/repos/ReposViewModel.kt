@@ -2,7 +2,11 @@ package br.com.concrete.ghpulls.ui.repos
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.insertSeparators
+import androidx.paging.map
+import androidx.paging.cachedIn
 import br.com.concrete.base.DEFAULT_PAGE_SIZE
 import br.com.concrete.ghpulls.R
 import br.com.concrete.ghpulls.pagingsource.LoadReposPagingSource

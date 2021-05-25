@@ -2,10 +2,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
+        classpath(libs.androidgradle.plugin)
+        classpath(libs.kotlin.plugin)
+        classpath(libs.detekt.plugin)
     }
 }
 
@@ -17,7 +19,9 @@ allprojects {
     }
 }
 
-subprojects { mainProject ->
+subprojects {
+    apply from: "$rootDir/tools/detekt.gradle"
+
     afterEvaluate { project ->
         def isAndroidModule = project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')
         if (isAndroidModule) {
