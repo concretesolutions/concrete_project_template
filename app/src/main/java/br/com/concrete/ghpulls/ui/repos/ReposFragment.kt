@@ -1,6 +1,7 @@
 package br.com.concrete.ghpulls.ui.repos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,16 +85,22 @@ class ReposFragment : Fragment() {
                 .collectLatest { loadState ->
                     if (loadState.refresh is LoadState.Loading) {
                         binding.progress.show()
+                        Log.d(TAG, "SHOW PROGRESS")
                     } else {
                         binding.progress.hide()
+                        Log.d(TAG, "HIDE PROGRESS")
                     }
 
-//                    binding.errorGroup.isVisible = loadState.refresh is LoadState.Error
+                    binding.errorGroup.isVisible = loadState.refresh is LoadState.Error
                 }
         }
 
         dbReposViewModel.refreshNetworkDb.observe(viewLifecycleOwner) {
             reposAdapter.refresh()
         }
+    }
+
+    companion object {
+        const val TAG = "ReposFragment"
     }
 }

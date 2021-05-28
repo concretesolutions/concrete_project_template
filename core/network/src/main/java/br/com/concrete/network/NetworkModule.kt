@@ -15,8 +15,11 @@ fun networkModule(
 ) = module {
     single {
         val okHttpClient = OkHttpClient.Builder()
+        val logger = HttpLoggingInterceptor()
+        logger.level = HttpLoggingInterceptor.Level.BASIC
+
         if (enableLog) {
-            okHttpClient.addInterceptor(HttpLoggingInterceptor())
+            okHttpClient.addInterceptor(logger)
         }
 
         val moshi = Moshi.Builder()
