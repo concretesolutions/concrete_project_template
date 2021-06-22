@@ -2,6 +2,7 @@
     <string name="app_name">Github pulls</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
+    <string name="title_theme">Theme</string>
     <string name="favorite">Favoritar</string>
     <string name="error_loading_content">Error loading content</string>
     <string name="try_again">Try again</string>
@@ -9,6 +10,9 @@
     <string name="reponame_sufix">" from"</string>
     <string name="others">Others</string>
     <string name="favorites">Favorites</string>
+    <string name="theme_default">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
 
     <plurals name="repostars_sufix">
         <item quantity="one">\u0020star</item>
