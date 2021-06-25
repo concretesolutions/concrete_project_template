@@ -9,7 +9,8 @@
     app:cardElevation="0dp"
     app:strokeColor="@color/divider"
     app:strokeWidth="1dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    app:cardBackgroundColor="?attr/cardBackgroundColor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -82,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
-            android:background="@color/bg_metrics_layer"
+            android:background="?android:attr/colorPrimary"
             android:orientation="horizontal"
             android:paddingStart="@dimen/default_margin"
             android:paddingEnd="@dimen/default_margin"
@@ -95,7 +96,7 @@
             android:id="@+id/metrics_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="?attr/metricsInfoTextColor"
             tools:text="3000 stars   700 forks" />
 
         <com.google.android.material.button.MaterialButton
@@ -104,7 +105,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/favorite"
-            app:backgroundTint="@color/primaryColor" />
+            android:textColor="?attr/metricsInfoTextColor"
+            app:backgroundTint="?android:colorPrimary"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

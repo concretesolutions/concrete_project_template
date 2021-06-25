@@ -1,6 +1,6 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="primaryColor">#9ccc65</color>
+  <color name="primaryColor">#EFFFEC</color>
   <color name="primaryLightColor">#cfff95</color>
   <color name="primaryDarkColor">#6b9b37</color>
   <color name="secondaryColor">#ff7043</color>
@@ -11,4 +11,16 @@
   <color name="divider">#EEEEEE</color>
   <color name="black">#000000</color>
   <color name="bg_metrics_layer">#EFFFEC</color>
+  <color name="defaultBackgroundColorLight">#FFFFFF</color>
+  <color name="metricsInfoTextColor">#5F5F5F</color>
+
+  <!--Night Mode Colors-->
+
+  <color name="secondaryNightColor">#2D2E30</color>
+  <color name="primaryNightColor">#474747</color>
+  <color name ="primaryTextNightColor">#E8EAED</color>
+  <color name="cardBackgroundColorNight">#2D2E30</color>
+  <color name="metricsInfoTextColorNight">#E8EAED</color>
+  <color name="mainBackgroundColorNight">#202124</color>
+
 </resources>

@@ -1,10 +1,12 @@
 package br.com.concrete.ghpulls
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +32,11 @@ class MainActivity : AppCompatActivity() {
         setupNavBar()
 
         loadTheme()
+
+        setAppTheme()
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = MenuInflater(this)
@@ -80,5 +87,15 @@ class MainActivity : AppCompatActivity() {
         val defaultValue = 1
         val theme = sharedPref.getInt("ActualTheme", defaultValue)
         AppCompatDelegate.setDefaultNightMode(theme)
+    }
+
+    private fun setAppTheme() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO ||
+            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        ) {
+            setTheme(R.style.Theme_GithubPulls)
+        } else {
+            setTheme(R.style.Theme_GithubPulls_night)
+        }
     }
 }
