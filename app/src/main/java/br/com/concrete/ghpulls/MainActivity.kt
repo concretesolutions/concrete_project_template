@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         setAppTheme()
     }
 
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = MenuInflater(this)
         inflater.inflate(R.menu.theme_selection_menu, menu)
