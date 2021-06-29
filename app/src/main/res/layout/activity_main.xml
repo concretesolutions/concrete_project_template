@@ -10,10 +10,11 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        style="@style/Widget.MaterialComponents.AppBarLayout.Primary"
+        style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="?attr/colorPrimarySurface"
+        app:titleTextColor="@android:color/white"
         app:menu="@menu/theme_selection_menu" />
 
     <androidx.fragment.app.FragmentContainerView

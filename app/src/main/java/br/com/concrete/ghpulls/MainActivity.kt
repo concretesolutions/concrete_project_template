@@ -1,6 +1,5 @@
 package br.com.concrete.ghpulls
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -9,20 +8,28 @@ import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import br.com.concrete.base.DataStoreManager
 import br.com.concrete.ghpulls.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var dataStore: DataStoreManager
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        dataStore = DataStoreManager(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -73,27 +80,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveTheme(theme: Int) {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putInt("ActualTheme", theme)
-            commit()
+        lifecycleScope.launch {
+            dataStore.saveTheme(theme)
         }
     }
 
     private fun loadTheme() {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val defaultValue = 1
-        val theme = sharedPref.getInt("ActualTheme", defaultValue)
-        AppCompatDelegate.setDefaultNightMode(theme)
+        dataStore.actualTheme.asLiveData().observe(this, Observer { theme ->
+            AppCompatDelegate.setDefaultNightMode(theme ?: 1)
+        })
     }
 
     private fun setAppTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO ||
-            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
         ) {
-            setTheme(R.style.Theme_GithubPulls)
-        } else {
             setTheme(R.style.Theme_GithubPulls_night)
+        } else {
+            setTheme(R.style.Theme_GithubPulls)
         }
     }
 }
