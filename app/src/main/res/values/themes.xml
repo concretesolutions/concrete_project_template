@@ -1,14 +1,42 @@
 <resources>
 
-    <style name="Theme.GithubPulls" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.GithubPulls" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryLightColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="cardBackgroundColor">@color/defaultBackgroundColorLight</item>
 
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
 
-        <item name="android:statusBarColor">@color/primaryDarkColor</item>
+        <item name="android:statusBarColor">@color/primaryColor</item>
+        <item name="metricsInfoTextColor">@color/metricsInfoTextColor</item>
+        <item name="mainBackgroundColor">@color/defaultBackgroundColorLight</item>
+        <item name="colorOnBackground">@color/primaryColor</item>
+
+        <item name="toolbarColor">@color/primaryDarkColor</item>
+        <item name="statusBarScrim">@color/primaryDarkColor</item>
+
+    </style>
+
+    <style name="Theme.GithubPulls_night" parent="ThemeOverlay.AppCompat.DayNight">
+        <item name="colorPrimary">@color/primaryNightColor</item>
+        <item name="colorPrimaryVariant">@color/secondaryNightColor</item>
+        <item name="colorOnPrimary">@color/primaryNightColor</item>
+        <item name="android:textColor">@color/primaryTextNightColor</item>
+        <item name="cardBackgroundColor">@color/secondaryNightColor</item>
+
+        <item name="colorSecondary">@color/primaryNightColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+
+        <item name="android:statusBarColor">@color/secondaryNightColor</item>
+        <item name="metricsInfoTextColor">@color/metricsInfoTextColorNight</item>
+        <item name="mainBackgroundColor">@color/mainBackgroundColorNight</item>
+        <item name="colorOnBackground">@color/primaryNightColor</item>
+        <item name="toolbarColor">@color/secondaryNightColor</item>
     </style>
 </resources>
