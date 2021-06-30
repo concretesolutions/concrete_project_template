@@ -4,6 +4,6 @@
     android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/black"
+    android:textColor="?android:attr/textColor"
     android:textStyle="bold"
     tools:text="Outros" />
